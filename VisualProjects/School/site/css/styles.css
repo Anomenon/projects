@@ -1,4 +1,4 @@
-#body_1 {
+body {
     background-color:#7b00ff;
     color:rgb(255, 0, 238); 
     font-family:Tahoma,Arial,Helvetica,sans-serif; 
@@ -6,6 +6,22 @@
     padding: 0px;
     margin: 0px;
 } 
+
+.grid-container {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    background-color: #2196F3;
+    padding: 10px;
+    }
+    .grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 1px solid rgba(0, 0, 0, 0.8);
+    padding: 20px;
+    font-size: 30px;
+    text-align: center;
+    }
+
+
 
 #h_1 {
     font-size: 50px;
@@ -48,7 +64,7 @@ li::before{
 }
 
 #img_1{
-    width: 100px;
+    width: 450px;
 }
 
 #img_2{

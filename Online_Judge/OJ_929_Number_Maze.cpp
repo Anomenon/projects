@@ -2,8 +2,8 @@
 #include <vector>
 #include <queue>
 #include <fstream>
-
 using namespace std;
+
 int INF = 1000000000;
 
 struct Tiles{
@@ -49,22 +49,20 @@ int Dijkstra(const vector<vector<int> >& Maze, int& Y_axis, int& X_axis){
 }
 
 int main(){
-    ifstream in_File("IN_OUT/input.txt");
-    ofstream out_File("IN_OUT/output.txt");
+    ofstream File("IN_OUT/output.txt");
     int n, Y_axis, X_axis;
 
-    for(cin >> n >> Y_axis >> X_axis; n--;){
+    for(cin >> n; n--;){
+        cin >> Y_axis >> X_axis;
         vector<vector<int> > Maze(Y_axis, vector<int> (X_axis));
 
         for(int y = 0; y < Y_axis; y++){
             for(int x = 0; x < X_axis; x++){
-                int square;
-                cin >> square;
-                Maze[y][x] = square;
+                cin >> Maze[y][x];
             }
         }
         
-        out_File << Dijkstra(Maze, Y_axis, X_axis) << '\n';
+        File << Dijkstra(Maze, Y_axis, X_axis) << '\n';
     }
     
     return 0;

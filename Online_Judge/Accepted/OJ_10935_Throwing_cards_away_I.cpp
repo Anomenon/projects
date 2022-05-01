@@ -1,11 +1,13 @@
 #include <iostream>
 #include <queue>
+#include <fstream>
 using namespace std;
 int main(){
     int n;
-    queue<int> deck;
-    vector<int> discarded;
-    while(cin >> n){
+
+    while(cin >> n, n != 0){
+        queue<int> deck;
+        vector<int> discarded;
         for(int i = 1; i < n + 1; i++){
             deck.push(i);
         }
@@ -24,10 +26,8 @@ int main(){
                 }  
             }
             cout << '\n' << "Remaining card: " << deck.front() << '\n';
-            discarded.clear();
-            while(deck.empty() == false){
-                deck.pop();
-            }
+        } else if (n == 1){
+            cout << "Discarded cards:" << '\n' << "Remaining card: " << deck.front() << '\n';
         }
     }
     return 0;

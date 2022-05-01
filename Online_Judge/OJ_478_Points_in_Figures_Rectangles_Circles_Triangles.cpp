@@ -66,7 +66,6 @@ int main(){
                 break;
         }
     }
-    cout << figures.size();
     while(cin >> x >> y, x != 9999.9 && y != 9999.9){
         bool isInside = false;
         for(int i = 0; i < figures.size(); i++){

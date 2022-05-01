@@ -3,8 +3,8 @@
 #include <fstream>
 using namespace std;
 int main(){
-    int n;
     ofstream File("IN_OUT/output.txt");
+    int n;
     while(cin >> n, n != 0){
         queue<int> deck;
         vector<int> discarded;

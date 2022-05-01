@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <fstream>
 using namespace std;
 int times = 0;
 void DFS(int v, vector< vector<int> >& tiles, vector<bool>& vis){
@@ -17,6 +18,7 @@ void addEdge(int node_a, int node_b, vector<vector<int> >& tiles){
     tiles[node_a].push_back(node_b);
 }
 int main(){
+    ofstream File("IN_OUT/output.txt");
     int cases, n, m, l;
     cin >> cases;
     for(int i = 0; i < cases; i++){
@@ -33,7 +35,7 @@ int main(){
             cin >> z;
             DFS(z, tiles, visited);   
         }
-        cout << times << '\n';
+        File << times << '\n';
         times = 0;
         visited.clear();
         tiles.clear();

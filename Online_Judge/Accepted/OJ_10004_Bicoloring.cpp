@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <fstream>
 using namespace std;
 void DFS(int v, int prev, vector<bool>& vis, vector< vector<int> >& g, vector<string>& colors){
     vis[v] = true; 
@@ -24,6 +25,7 @@ void addEdge(int node_a, int node_b, vector<vector<int> >& graph){
     graph[node_b].push_back(node_a);
 }
 int main(){
+    ofstream File("IN_OUT/output.txt");
     int nodes, edges, node_a, node_b;    
     while(cin >> nodes){
         if(nodes == 0){
@@ -54,7 +56,7 @@ int main(){
                 break;
             }        
         }
-        cout << is_bicolorable << '\n';       
+        File << is_bicolorable << '\n';       
     }
     return 0;
 }

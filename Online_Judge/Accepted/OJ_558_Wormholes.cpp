@@ -53,9 +53,9 @@ int main(){
 
         
         if(Ford_Algorithm(worm_H, star_system, wormholes)){
-            cout << "possible" << endl;
+            File << "possible" << endl;
         } else {
-            cout << "not possible" << endl;
+            File << "not possible" << endl;
         }
     }
     return 0;

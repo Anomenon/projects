@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <fstream>
 using namespace std;
 
 void DFS(int v, vector<bool>& vis, vector< vector<int> >& g){
@@ -18,6 +19,7 @@ void addEdge(char a, char b, vector<vector<int> >& g){
 }
 
 int main(){
+    ofstream File("IN_OUT/output.txt");
     vector<vector<int> > G;
     int cases;
     char l_node;
@@ -25,6 +27,9 @@ int main(){
     cin >> cases;
     
     for(int i = 0; i < cases; i++){
+        if(i != 0){
+            File << '\n';
+        }
         cin >> l_node;
         vector<vector<int> > G(l_node - 'A' + 1);
         vector<bool> visited(l_node - 'A' + 1, false);
@@ -37,7 +42,6 @@ int main(){
             addEdge(edge[0], edge[1], G);
         }
 
-
         int graphs = 0, not_visited = -1;
         int node = l_node - 'A';
         while(not_visited != 0){
@@ -47,15 +51,13 @@ int main(){
             for(int j = 0; j < visited.size(); j++){
                 if(visited[j] == false){
                     node = j;
-                    
                     not_visited = -1;
                 }
             }
             graphs++;
         }
 
-
-        cout << graphs << '\n';
+        File << graphs << "\n";
         G.clear();
         visited.clear();
     }

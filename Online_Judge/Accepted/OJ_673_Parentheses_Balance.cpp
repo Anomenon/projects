@@ -5,6 +5,7 @@
 using namespace std;
 
 int main(){
+    ofstream File("IN_OUT/output.txt");
     int num;
     string parentheses;
     stack<char> stack;
@@ -32,9 +33,9 @@ int main(){
 
         }
         if(stack.empty()){
-            cout << "Yes\n";
+            File << "Yes\n";
         } else {
-            cout << "No\n";
+            File << "No\n";
         }
 
         for(int i = stack.size(); i--;){

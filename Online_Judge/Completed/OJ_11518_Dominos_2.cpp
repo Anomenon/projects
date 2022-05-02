@@ -20,21 +20,25 @@ void addEdge(int node_a, int node_b, vector<vector<int> >& tiles){
 int main(){
     ofstream File("IN_OUT/output.txt");
     int cases, n, m, l;
-    cin >> cases;
-    for(int i = 0; i < cases; i++){
+
+    for(cin >> cases; cases--;){
         cin >> n >> m >> l;
+
         vector<vector<int> > tiles(n + 1);
         vector<bool> visited(n + 1, false);
+
         for(int j = 0; j < m; j++){
             int x, y;
             cin >> x >> y;
             addEdge(x, y, tiles);
         }
+
         for(int j = 0; j < l; j++){
             int z;
             cin >> z;
             DFS(z, tiles, visited);   
         }
+        
         File << times << '\n';
         times = 0;
         visited.clear();

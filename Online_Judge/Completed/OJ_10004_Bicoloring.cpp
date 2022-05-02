@@ -4,16 +4,20 @@
 using namespace std;
 void DFS(int v, int prev, vector<bool>& vis, vector< vector<int> >& g, vector<string>& colors){
     vis[v] = true; 
+    
     for (int i = 0; i < g[v].size(); i++){
         if(v == 0){
+
             colors[v] = "red";
         } else {
+
             if(colors[prev] == "red"){
                 colors[v]= "green";
             } else {
                 colors[v] = "red";
             }
         }
+
         if (vis[g[v][i]] == false){
             int prev = v;
             DFS(g[v][i], prev, vis, g, colors);
@@ -31,10 +35,12 @@ int main(){
         if(nodes == 0){
             break;
         }
+
         cin >> edges;
         vector <vector<int> > graph(nodes);
         vector<bool> visited(nodes, false);
-        vector<string> colors(nodes, "no color");        
+        vector<string> colors(nodes, "no color");   
+
         for(int i = 0; i < edges; i++){
             cin >> node_a >> node_b;
             addEdge(node_a, node_b, graph);
@@ -44,18 +50,22 @@ int main(){
         bool bnot = false;
         for (int i = 0; i < graph.size(); i++) {
             for (int j = 0; j < graph[i].size(); j++){
+
                 if(colors[i] != colors[graph[i][j]]){
                     is_bicolorable = "BICOLORABLE.";
+
                 } else {
                     is_bicolorable = "NOT BICOLORABLE.";
                     bnot = true;
                     break;
                 }
             }
+
             if(bnot){
                 break;
             }        
         }
+
         File << is_bicolorable << '\n';       
     }
     return 0;

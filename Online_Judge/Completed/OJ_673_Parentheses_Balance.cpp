@@ -37,7 +37,7 @@ int main(){
         } else {
             File << "No\n";
         }
-
+        
         for(int i = stack.size(); i--;){
             stack.pop();
         }

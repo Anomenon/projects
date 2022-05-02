@@ -5,9 +5,11 @@ using namespace std;
 int main(){
     ofstream File("IN_OUT/output.txt");
     int n;
+
     while(cin >> n, n != 0){
         queue<int> deck;
         vector<int> discarded;
+        
         for(int i = 1; i < n + 1; i++){
             deck.push(i);
         }
@@ -19,6 +21,7 @@ int main(){
             deck.pop();
         }
         File << "Discarded cards:";
+
         for(int i = 0; i < discarded.size(); i++){
             File << " " << discarded[i];
             if(i + 1 != discarded.size()){

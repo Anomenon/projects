@@ -61,7 +61,7 @@ int Dijkstra(const vector<vector<int>>& Maze, int X_axis, int Y_axis){
             }
             
         }
-
+        
         if (tile.y - 1 >= 0){
             if (dist[tile.x][tile.y] + Maze[tile.x][tile.y - 1] < dist[tile.x][tile.y - 1]){
                 dist[tile.x][tile.y - 1] = dist[tile.x][tile.y] + Maze[tile.x][tile.y - 1];

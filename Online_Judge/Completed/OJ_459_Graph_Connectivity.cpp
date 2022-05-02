@@ -56,7 +56,7 @@ int main(){
             }
             graphs++;
         }
-
+        
         File << graphs << "\n";
         G.clear();
         visited.clear();

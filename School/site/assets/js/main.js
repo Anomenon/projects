@@ -1,7 +1,7 @@
 const selectElement = (selector) => {
     const element = document.querySelector(selector);
     if(element) return element;
-    throw new Error(`Something went wrong! Make sure that ${selector} exists/is typed correctly.`);  
+    throw new Error(`Error`);  
 };
 
 const scrollHeader = () =>{
@@ -30,9 +30,12 @@ menuToggleIcon.addEventListener('click', toggleMenu);
 
 formOpenBtn.addEventListener('click', () => searchContainer.classList.add('activated'));
 formCloseBtn.addEventListener('click', () => searchContainer.classList.remove('activated'));
-window.addEventListener('keyup', (event) => {
-    if(event.key === 'Escape') searchContainer.classList.remove('activated');
-});
+
+window.addEventListener(
+    'keyup', (event) => {
+        if(event.key === 'Escape') searchContainer.classList.remove('activated');
+    }
+);
 
 const body = document.body;
 const themeToggleBtn = selectElement('#theme-toggle-btn');
@@ -42,32 +45,14 @@ if (currentTheme) {
     body.classList.add('light-theme');
 }
 
-themeToggleBtn.addEventListener('click', function () {
-    body.classList.toggle('light-theme');
+themeToggleBtn.addEventListener(
+    'click', function () {
+        body.classList.toggle('light-theme');
 
-    if (body.classList.contains('light-theme')) {
-        localStorage.setItem('currentTheme', 'themeActive');
-    } else {
-        localStorage.removeItem('currentTheme');
-    }
-});
-
-const swiper = new Swiper(".swiper", {
-    slidesPerView: 1,
-    spaceBetween: 20,
-    navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-    },
-    pagination: {
-        el: '.swiper-pagination'
-    },
-    breakpoints: {
-        700: {
-          slidesPerView: 2
-        },
-        1200: {
-            slidesPerView: 3
+        if (body.classList.contains('light-theme')) {
+            localStorage.setItem('currentTheme', 'themeActive');
+        } else {
+            localStorage.removeItem('currentTheme');
         }
-    }   
-});
+    }
+);

@@ -32,13 +32,13 @@ int Dijkstra(const vector<vector<int> >& Maze, int& Y_axis, int& X_axis){
             break;
         }
         if(tile.x + 1 != X_axis){
-            if(dist[tile.v] + Maze[tile.y][tile.x + 1] < dist[tile.v + 1]){
+            if(dist[tile.v] + Maze[tile.y][tile.x + 1] <= dist[tile.v + 1]){
                 dist[tile.v + 1] = dist[tile.v] + Maze[tile.y][tile.x + 1];
             }
             q.emplace(tile.v + 1, Maze[tile.y][tile.x + 1], tile.x + 1, tile.y);
         }
         if(tile.y + 1 != Y_axis){
-            if(dist[tile.v] + Maze[tile.y + 1][tile.x] < dist[tile.v + 1 + Y_axis]){
+            if(dist[tile.v] + Maze[tile.y + 1][tile.x] <= dist[tile.v + 1 + Y_axis]){
                 dist[tile.v + 1 + Y_axis] = dist[tile.v] + Maze[tile.y + 1][tile.x];
             }
             q.emplace(tile.v + Y_axis + 1, Maze[tile.y + 1][tile.x], tile.x, tile.y + 1);

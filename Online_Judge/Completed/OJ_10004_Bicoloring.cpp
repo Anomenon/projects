@@ -2,52 +2,55 @@
 #include <vector>
 #include <fstream>
 using namespace std;
-void DFS(int v, int prev, vector<bool>& vis, vector< vector<int> >& g, vector<string>& colors){
-    vis[v] = true; 
+
+void DFS(int v, int prev, vector<vector<int> >& g, vector<char>& colors){
     
     for (int i = 0; i < g[v].size(); i++){
         if(v == 0){
 
-            colors[v] = "red";
+            colors[v] = 'r';
         } else {
 
-            if(colors[prev] == "red"){
-                colors[v]= "green";
+            if(colors[prev] == 'r'){
+                colors[v]= 'g';
             } else {
-                colors[v] = "red";
+                colors[v] = 'r';
             }
         }
 
-        if (vis[g[v][i]] == false){
+        if (colors[g[v][i]] == '-'){
             int prev = v;
-            DFS(g[v][i], prev, vis, g, colors);
+            DFS(g[v][i], prev, g, colors);
         }
     }     
 }
+
 void addEdge(int node_a, int node_b, vector<vector<int> >& graph){
     graph[node_a].push_back(node_b);
     graph[node_b].push_back(node_a);
 }
+
 int main(){
     ofstream File("IN_OUT/output.txt");
     int nodes, edges, node_a, node_b;    
-    while(cin >> nodes){
-        if(nodes == 0){
-            break;
-        }
+
+    while(cin >> nodes, nodes != 0){
 
         cin >> edges;
         vector <vector<int> > graph(nodes);
         vector<bool> visited(nodes, false);
-        vector<string> colors(nodes, "no color");   
+        vector<char> colors(nodes, '-');   
 
         for(int i = 0; i < edges; i++){
             cin >> node_a >> node_b;
             addEdge(node_a, node_b, graph);
         }
-        DFS(0, 0, visited, graph, colors);
+        
+        DFS(0, 0, graph, colors);
+
         string is_bicolorable = " ";
         bool bnot = false;
+
         for (int i = 0; i < graph.size(); i++) {
             for (int j = 0; j < graph[i].size(); j++){
 

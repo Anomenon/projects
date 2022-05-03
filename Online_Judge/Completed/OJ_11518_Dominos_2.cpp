@@ -2,11 +2,14 @@
 #include <vector>
 #include <fstream>
 using namespace std;
+
 int times = 0;
+
 void DFS(int v, vector< vector<int> >& tiles, vector<bool>& vis){
     if(vis[v] == false){
         times++;
     }
+    
     vis[v] = true;
     for (int i = 0; i < tiles[v].size(); i++){
         if (vis[tiles[v][i]] == false){
@@ -14,9 +17,11 @@ void DFS(int v, vector< vector<int> >& tiles, vector<bool>& vis){
         }
     }     
 }
+
 void addEdge(int node_a, int node_b, vector<vector<int> >& tiles){
     tiles[node_a].push_back(node_b);
 }
+
 int main(){
     ofstream File("IN_OUT/output.txt");
     int cases, n, m, l;

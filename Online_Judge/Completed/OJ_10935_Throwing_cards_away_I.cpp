@@ -2,6 +2,7 @@
 #include <queue>
 #include <fstream>
 using namespace std;
+
 int main(){
     ofstream File("IN_OUT/output.txt");
     int n;

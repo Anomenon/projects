@@ -37,8 +37,7 @@ int main(){
     while(cin >> nodes, nodes != 0){
 
         cin >> edges;
-        vector <vector<int> > graph(nodes);
-        vector<bool> visited(nodes, false);
+        vector<vector<int> > graph(nodes);
         vector<char> colors(nodes, '-');   
 
         for(int i = 0; i < edges; i++){

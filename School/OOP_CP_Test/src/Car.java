@@ -1,26 +1,14 @@
 public class Car {
-    private int speed, acceleration, topSpeed;
+    private float speed, acceleration, topSpeed;
 
-    public int getSpeed() {
-        return speed;
-    }
-    public void setSpeed(int newSpeed) {
-        this.speed = newSpeed;
-    }
+    public float getSpeed() {return speed;}
+    public void setSpeed(int newSpeed) {this.speed = newSpeed;}
 
-    public int getAcceleration() {
-        return acceleration;
-    }
-    public void setAcceleration(int newAcceleration) {
-        this.acceleration = newAcceleration;
-    }
+    public float getAcceleration() {return acceleration;}
+    public void setAcceleration(float newAcceleration) {this.acceleration = newAcceleration;}
 
-    public int getTopSpeed() {
-        return topSpeed;
-    }
-    public void setTopSpeed(int newTopSpeed) {
-        this.topSpeed = newTopSpeed;
-    }
+    public float getTopSpeed() {return topSpeed;}
+    public void setTopSpeed(float newTopSpeed) {this.topSpeed = newTopSpeed;}
 
     void accelerate(){
         if(speed + acceleration <= topSpeed){
@@ -28,7 +16,7 @@ public class Car {
         }
     }
 
-    public Car(int speed, int acceleration, int topSpeed){
+    public Car(float speed, float acceleration, float topSpeed){
         this.speed = speed;
         this.acceleration = acceleration;
         this.topSpeed = topSpeed;

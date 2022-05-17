@@ -1,12 +1,6 @@
 public class Main {
     public static void main(String[] args) {
-        RaceTrack Race = new RaceTrack();
-
-        Race.setLength(200);
+        PoolRace Race = new PoolRace(200,10);
         Race.race();
     }
 }
-
-
-
-

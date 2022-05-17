@@ -51,7 +51,6 @@ public class Game_Input {
                 }
 
                 case 37, 65 -> Main.Menu_changer = 0;
-
                 case 39, 68 -> Main.Menu_changer = 1;
 
                 //------------------------

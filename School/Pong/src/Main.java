@@ -1,10 +1,7 @@
 import java.util.Random;
 
 /**
- * cd IdeaProjects/Pong/out/production/Pong
- *
- * Tomorrow plan:
- * -Ball A.I.
+ * cd Projects/School/Pong/out/production/Pong/
  */
 
 public class Main {

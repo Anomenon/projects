@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 using namespace std;
+//prefix iterating and infix iterating
 
 struct W{
     int value;
@@ -9,6 +10,14 @@ struct W{
 
     W(int v) : value{v} {}
 };
+
+void prefix_iterating(){
+
+}
+
+void infix_iterating(){
+
+}
 
 void insert(W* x, int n){
     if(n >= x->value){
@@ -37,6 +46,6 @@ int main(){
     insert(x, 4);
     insert(x, 1);
 
-    cout << prefix_iterating(x) << '\n';
+
     return 0;
 }

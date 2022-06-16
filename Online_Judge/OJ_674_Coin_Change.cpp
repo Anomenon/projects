@@ -4,7 +4,7 @@
 using namespace std;
 
 int main(){
-    ofstream outFile("IN_OUT/output.txt");
+    ofstream outFile("IN_OUT/output.txt"); 
 
     return 0;
 }

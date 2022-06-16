@@ -1,13 +1,11 @@
 #include <iostream>
+#include <fstream>
+#include <vector>
 using namespace std;
 
 
 int main(){
-    int Kingdom_num;
-
-    while(cin >> Kingdom_num, Kingdom_num != -1){
-
-        
-    }
+    ofstream outFile("IN_OUT/output.txt");
+    
     return 0;
 }

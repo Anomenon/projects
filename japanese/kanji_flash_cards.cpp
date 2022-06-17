@@ -19,7 +19,7 @@ string str;
 bool flash_cards(int randomNumber, vector<int>& forgotten, int num, bool& go_to_forgotten, bool& new_forgotten){
     
 
-    cout << "█▄▀ ▄▀█ █▄░█ ░░█ █   █▀▀ █░░ ▄▀█ █▀ █░█   █▀▀ ▄▀█ █▀█ █▀▄ █▀\n" << 
+    cout << "\n█▄▀ ▄▀█ █▄░█ ░░█ █   █▀▀ █░░ ▄▀█ █▀ █░█   █▀▀ ▄▀█ █▀█ █▀▄ █▀\n" << 
             "█░█ █▀█ █░▀█ █▄█ █   █▀░ █▄▄ █▀█ ▄█ █▀█   █▄▄ █▀█ █▀▄ █▄▀ ▄█\n\n" << std::endl;
 
     cout << num << ". " << kanji[randomNumber].kanji << ' ';

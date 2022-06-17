@@ -20,7 +20,7 @@ bool flash_cards(int randomNumber, vector<int>& forgotten, int num, bool& go_to_
     
 
     cout << "\n█▄▀ ▄▀█ █▄░█ ░░█ █   █▀▀ █░░ ▄▀█ █▀ █░█   █▀▀ ▄▀█ █▀█ █▀▄ █▀\n" << 
-            "█░█ █▀█ █░▀█ █▄█ █   █▀░ █▄▄ █▀█ ▄█ █▀█   █▄▄ █▀█ █▀▄ █▄▀ ▄█\n\n" << std::endl;
+              "█░█ █▀█ █░▀█ █▄█ █   █▀░ █▄▄ █▀█ ▄█ █▀█   █▄▄ █▀█ █▀▄ █▄▀ ▄█\n\n" << std::endl;
 
     cout << num << ". " << kanji[randomNumber].kanji << ' ';
     

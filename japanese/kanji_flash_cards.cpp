@@ -117,7 +117,7 @@ int main(){
                 }
             } 
         } else {
-            cout << "Wait... you forgot some? Lets try again then" << "\n\n";
+            cout << "Wait... you forgot some? Lets try again then";
             int y = forgotten.size();
             
             for(int i = 0; i < y; i++){

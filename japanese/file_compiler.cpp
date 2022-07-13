@@ -7,7 +7,7 @@ int main(){
     string input;
     ofstream outFile("aput.txt");
 
-    for(int i = 0; i < 394; i++){
+    for(int i = 0; i < 24; i++){
         getline(cin, input);
         outFile << ", \"" << input << "\"";
     }

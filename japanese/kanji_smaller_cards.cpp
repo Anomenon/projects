@@ -1,147 +1,69 @@
 #include <iostream>
 #include <vector>
-#include <random>
 using namespace std;
 
-struct Kanji{
+struct Kanji
+{
     string kanji;
+    string readings;
+    string meanings;
     bool was_shown;
 
-    Kanji(string k, bool s) : kanji{k}, was_shown{s} {}
 };
+int const SIZE = 75;
+int num = 1;
+int num_of_forgotten = 0;
 
-const int Overall_size = 48;
-Kanji kanji[Overall_size] = {{"盾", false}, {"勇", false}, {"信", false}, {"誰", false}, {"恥", false}, {"氏", false}, {"真", false}, {"快", false}, {"適", false}, {"仕", false}, {"欲", false}, {"昨", false}, {"付", false}, {"号", false}, {"鉄", false}, {"失", false}, {"油", false}, {"昭", false}, {"植", false}, {"宿", false}, {"薬", false}, {"医", false}, {"習", false}, {"倍", false}, {"洋", false}, {"旅", false}, {"服", false}, {"以", false}, {"別", false}, {"特", false}, {"建", false}, {"試", false}, {"験", false}, {"借", false}, {"堂", false}, {"質", false}, {"貸", false}, {"発", false}, {"業", false}, {"代", false}, {"動", false}, {"題", false}, {"度", false}, {"院", false}, {"重", false}, {"集", false}, {"物", false}, {"品", false}};
-const string readings[Overall_size] = {"ジュン・たて", "ユウ・いさ.む", "シン", "スイ・だれ・たれ・た", "チ・は.じる・はじ・は.じらう・は.ずかしい", "シ・うじ・~うじ", "シン・ま・ま~・まこと", "カイ・こころよ.い", "テキ・かな.う", "シ・ジ・つか.える", "ヨク・ほっ.する・ほ.しい", "サク", "フ・つ.ける・~つ.ける・~づ.ける・つ.け・つ.け~・~つ.け・~づ.け・~づけ・つ.く・~づ.く・つ.き・~つ.き・~つき・~づ.き・~づき", "ゴウ・さけ.ぶ・よびな", "テツ・くろがね", "シツ・うしな.う・う.せる", "ユ・ユウ・あぶら", "ショウ", "ショク・う.える・う.わる", "シュク・やど・やど.る・やど.す", "ヤク・くすり", "イ・い.やす・い.する・くすし", "シュウ・ジュ・なら.う・なら.い", "バイ", "ヨウ", "リョ・たび", "フク", "イ・もっ.て", "ベツ・わか.れる・わ.ける", "トク", "ケン・コン・た.てる・た.て・~だ.て・た.つ", "シ・こころ.みる・ため.す", "ケン・ゲン・あかし・しるし・ため.す・ためし", "シャク・か.りる", "ドウ", "シツ・シチ・チ・たち・ただ.す・もと・わりふ", "タイ・か.す・か.し~・かし~", "ハツ・ホツ・た.つ・あば.く・おこ.る・つか.わす・はな.つ", "ギョウ・ゴウ・わざ", "ダイ・タイ・か.わる・かわ.る・かわ.り・か.わり・~がわ.り・~が.わり・か.える・よ・しろ", "ドウ・うご.く・うご.かす", "ダイ", "ド・ト・タク・たび・~た.い", "イン", "ジュウ・チョウ・え・おも.い・おも.り・おも.なう・かさ.ねる・かさ.なる・おも", "シュウ・あつ.まる・あつ.める・つど.う", "ブツ・モツ・もの・もの~", "ヒン・ホン・しな"};
-const string meanings[Overall_size] = {"shield; escutcheon; pretext", "courage; cheer up; be in high spirits; bravery; heroism", "faith; truth; fidelity; trust", "who; someone; somebody", "shame; dishonor", "family name; surname; clan", "true; reality; Buddhist sect", "cheerful; pleasant; agreeable; comfortable", " suitable; occasional; rare; qualified; capable", "attend; doing; official; serve", "longing; covetousness; greed; passion; desire; craving", "yesterday; previous", "adhere; attach; refer to; append", "nickname; number; item; title; pseudonym; name; call", "iron", "lose; error; fault; disadvantage; loss", "oil; fat", "shining; bright", "plant", "inn; lodging; relay station; dwell; lodge; be pregnant; home; dwelling", "medicine; chemical; enamel; gunpowder; benefit", "doctor; medicine", "learn", "double; twice; times; fold", "ocean; sea; foreign; Western style", "trip; travel", "clothing; admit; obey; discharge", "by means of; because; in view of; compared with", "separate; branch off; diverge; fork; another; extra; specially", "special", "build", "test; try; attempt; experiment; ordeal", "verification; effect; testing", "borrow; rent", "public chamber; hall", "substance; quality; matter; temperament", "lend", "departure; discharge; publish; emit; start from; disclose; counter for gunshots", "business; vocation; arts; performance", "substitute; change; convert; replace; period; age; counter for decades of ages, eras, etc.; generation; charge; rate; fee ", "move; motion; change; confusion; shift; shake", "topic; subject", "degrees; occurrence; time; counter for", "Inst.; institution; temple; mansion; school", "heavy; important; esteem; respect; heap up; pile up; nest of boxes; -fold", "gather; meet; congregate; swarm; flock", "thing; object; matter", "goods; refinement; dignity; article; counter for meal courses"};
-string str;
+Kanji kanji_data[SIZE] = {{"怖", "フ・ホ・こわ.い・こわ.がる・お.じる・おそ.れる", "dreadful; befrightened; fearful", false}, {"忙", "ボウ・モウ・いそが.しい・せわ.しい・おそ.れる・うれえるさま", "busy; occupied; restless", false}, {"靴", "カ・くつ", "shoes", false}, {"偶", "グウ・たま", "accidentally; evennumber; couple; man&wife; samekind", false}, {"偉", "イ・えら.い", "admirable; greatness; remarkable; conceited; famous; excellent", false}, {"幾", "キ・いく~・いく.つ・いく.ら", "howmany; howmuch; howfar; howlong; some; several", false}, {"疑", "ギ・うたが.う", "doubt; distrust; besuspicious; question", false}, {"供", "キョウ・ク・クウ・グ・そな.える・とも・~ども", "submit; offer; present; serve(meal); accompany", false}, {"割", "カツ・わ.る・わり・わ.り・わ.れる・さ.く", "proportion; comparatively; divide; cut; separate; split", false}, {"優", "ユウ・ウ・やさ.しい・すぐ.れる・まさ.る", "tenderness; excel; surpass; actor; superiority; gentleness", false}, {"収", "シュウ・おさ.める・おさ.まる", "income; obtain; reap; pay; supply; store", false}, {"宅", "タク", "home; house; residence; ourhouse; myhusband", false}, {"貰", "セイ・シャ・もら.う", "get; have; obtain", false}, {"警", "ケイ・いまし.める", "admonish; commandment", false}, {"与", "ヨ・あた.える・あずか.る・くみ.する・ともに", "bestow; participate in; give; award; impart; provide; cause; gift; godsend", false}, {"渡", "ト・わた.る・~わた.る・わた.す", "transit; ford; ferry; cross; import; deliver; diameter; migrate", false}, {"突", "トツ・カ・つ.く", "stab; protruding; thrust; pierce; prick; collision; sudden", false}, {"捕", "ホ・と.らえる・と.らわれる・と.る・とら.える・とら.われる・つか.まえる・つか.まる", "catch; capture", false}, {"迎", "ゲイ・むか.える", "welcome; meet; greet", false}, {"舞", "ブ・ま.う・~ま.う・まい", "dance; flit; circle; wheel", false}, {"頼", "ライ・たの.む・たの.もしい・たよ.る", "trust; request", false}, {"途", "ト・みち", "route; way; road", false}, {"婚", "コン", "marriage", false}, {"結", "ケツ・ケチ・むす.ぶ・ゆ.う・ゆ.わえる", "tie; bind; contract; join; organize; do up hair; fasten", false}, {"浮", "フ・う.く・う.かれる・う.かぶ・む・う.かべる", "floating; float; rise to surface", false}, {"押", "オウ・お.す・お.し~・お.っ~・お.さえる・おさ.える", "push; stop; check; subdue; attach; seize; weight; shove; press; seal; do in spite of", false}, {"神", "シン・ジン・かみ・かん~・こう~", "gods; mind; soul", false}, {"倒", "トウ・たお.れる・~だお.れ・たお.す・さかさま・さかさ・さかしま", "overthrow; fall; collapse; drop; break down", false}, {"抱", "ホウ・だ.く・いだ.く・かか.える", "embrace; hug; hold in arms", false}, {"恐", "キョウ・おそ.れる・おそ.る・おそ.ろしい・こわ.い・こわ.がる", "fear; dread; awe", false}, {"戻", "レイ・もど.す・もど.る", "re-; return; revert; resume; restore; go backwards", false}, {"越", "エツ・オツ・こ.す・~こ.す・~ご.し・こ.える・~ご.え", "surpass; cross over; move to; exceed; Vietnam", false}, {"勤", "キン・ゴン・つと.める・~づと.め・つと.まる・いそ.しむ", "diligence; become employed; serve", false}, {"困", "コン・こま.る", "quandary; become distressed; annoyed", false}, {"刻", "コク・きざ.む・きざ.み", "engrave; cut fine; chop; hash; mince; time; carving", false}, {"痛", "ツウ・いた.い・いた.む・いた.ましい・いた.める", "pain; hurt; damage; bruise", false}, {"探", "タン・さぐ.る・さが.す", "grope; search; look for", false}, {"暮", "ボ・く.れる・く.らす", "evening; twilight; season's end; livelihood; make a living; spend time", false}, {"温", "オン・あたた.か・あたた.かい・あたた.まる・あたた.める・ぬく", "warm", false}, {"泉", "セン・いずみ", "spring; fountain", false}, {"恋", "レン・こ.う・こい・こい.しい", "romance; in love; yearn for; miss; darling", false}, {"寒", "カン・さむ.い", "cold", false}, {"冷", "レイ・つめ.たい・ひ.える・ひ.や・ひ.ややか・ひ.やす・ひ.やかす・さ.める・さ.ます", "cool; cold (beer person); chill", false}, {"暑", "ショ・あつ.い", "sultry; hot; summer heat", false}, {"熱", "ネツ・あつ.い", "heat; temperature; fever; mania; passion", false}, {"暖", "ダン・ノン・あたた.か・あたた.かい・あたた.まる・あたた.める", "warmth", false}, {"吸", "キュウ・す.う", "suck; imbibe; inhale; sip", false}, {"忘", "ボウ・わす.れる", "forget", false}, {"洗", "セン・あら.う", "wash; inquire into; probe", false}, {"泳", "エイ・およ.ぐ", "swim", false}, {"窓", "ソウ・ス・まど・てんまど・けむだし", "window; pane", false}, {"腹", "フク・はら", "abdomen; belly; stomach", false}, {"頂", "チョウ・いただ.く・いただき", "place on the head; receive; top of head; top; summit; peak", false}, {"誤", "ゴ・あやま.る・~あやま.る", "mistake; err; do wrong; mislead", false}, {"否", "ヒ・いな・いや", "negate; no; noes; refuse; decline; deny", false}, {"存", "ソン・ゾン・ながら.える・あ.る・たも.つ・と.う", "exist; suppose; be aware of; believe; feel", false}, {"違", "イ・ちが.う・ちが.い・ちが.える・~ちが.える・たが.う・たが.える", "difference; differ", false}, {"訪", "ホウ・おとず.れる・たず.ねる・と.う", "call on; visit; look up; offer sympathy", false}, {"州", "シュウ・ス・す", "state; province", false}, {"訳", "ヤク・わけ", "translate; reason; circumstance; case", false}, {"若", "ジャク・ニャク・ニャ・わか.い・わか~・も.しくわ・も.し・も.しくは・ごと.し", "young; if; perhaps; possibly; low number; immature", false}, {"段", "ダン・タン", "grade; steps; stairs", false}, {"呼", "コ・よ.ぶ", "call; call out to; invite", false}, {"値", "チ・ね・あたい", "price; cost; value", false}, {"処", "ショ・ところ・~こ・お.る", "dispose; manage; deal with; sentence; condemn; act; behave; place", false}, {"所", "ショ・ところ・~ところ・どころ・とこ", "place; extent", false}, {"在", "ザイ・あ.る", "exist; outskirts; suburbs; located in", false}, {"座", "ザ・すわ.る", "squat; seat; cushion; gathering; sit", false}, {"除", "ジョ・ジ・のぞ.く・~よ.け", "exclude; division (x/3); remove; abolish; cancel; except", false}, {"降", "コウ・ゴ・お.りる・お.ろす・ふ.る・ふ.り・くだ.る・くだ.す", "descend; precipitate; fall; surrender", false}, {"危", "キ・あぶ.ない・あや.うい・あや.ぶむ", "dangerous; fear; uneasy", false}, {"亡", "ボウ・モウ・な.い・な.き~・ほろ.びる・ほろ.ぶ・ほろ.ぼす", "deceased; the late; dying; perish", false}, {"更", "コウ・さら・さら.に・ふ.ける・ふ.かす", "grow late; night watch; sit up late; of course; renew; renovate; again; more and more; further", false}, {"払", "フツ・ヒツ・ホツ・はら.う・~はら.い・~ばら.い", "pay; clear out; prune; banish; dispose of", false}, {"背", "ハイ・せ・せい・そむ.く・そむ.ける", "stature; height; back; behind; disobey; defy; go back on; rebel", false}};
 
-bool flash_cards(int randomNumber, vector<int>& forgotten, int num, bool& go_to_forgotten, bool& new_forgotten){
-    
+void print(vector<int>& forgotten){
+    srand(time(NULL));
+    int random_kanji;
+    string str;
+
+    while(kanji_data[random_kanji].was_shown){
+        random_kanji = rand() % SIZE;
+    }
+    kanji_data[random_kanji].was_shown = true;
 
     cout << "\n█▄▀ ▄▀█ █▄░█ ░░█ █   █▀▀ █░░ ▄▀█ █▀ █░█   █▀▀ ▄▀█ █▀█ █▀▄ █▀\n" << 
               "█░█ █▀█ █░▀█ █▄█ █   █▀░ █▄▄ █▀█ ▄█ █▀█   █▄▄ █▀█ █▀▄ █▄▀ ▄█\n\n" << std::endl;
 
-    cout << num << ". " << kanji[randomNumber].kanji << ' ';
-    
-    while(getline(cin, str)){
-        for (int i = 0; i < str.length(); i++){
-            str[i] = tolower(str[i]);
+    cout << num << ". " <<  kanji_data[random_kanji].kanji;
+    getline(cin, str);
+
+    cout <<  '\n' << "----------" << '\n' << "Readings: " << kanji_data[random_kanji].readings << "\n" << "Meanings: " << kanji_data[random_kanji].meanings << '\n';
+
+    getline(cin, str); 
+    if(!str.empty()){
+        forgotten.push_back(num - 1);
+    }
+
+    system("clear");
+    if(num != SIZE && num != num_of_forgotten){
+        num++;
+        print(forgotten); 
+    } else if(!forgotten.empty()) {
+        cout << "Wait... you forgot some? Lets try again then";
+        for(int i = 0; i < forgotten.size(); i++){
+            kanji_data[forgotten[i]].was_shown = false;
         }
-
-        if(str.empty()){
-            cout<< "----------" << '\n';
-            cout << "readings: " << readings[randomNumber] << '\n';
-            cout << "meanings: " << meanings[randomNumber] << "\n";
-
-            while(getline(cin, str)){
-                for (int i = 0; i < str.length(); i++){
-                    str[i] = tolower(str[i]);
-                }
-
-                if(str.empty()){
-                    system("clear");
-                    return false;
-
-                } else if (str == "e"){
-                    return true;
-
-                } else if (str != "q" && str != "e" && !str.empty()){
-                    forgotten.push_back(randomNumber);
-                    system("clear");
-                    new_forgotten = true;
-                    return false;
-                } else if (str == "q"){
-                    system("clear");
-                    go_to_forgotten = true;
-                    return false;
-                }
-            }  
-             
-        } else if (str == "e"){
-            return true;
-
-        } else if (str != "q" && str != "e" && !str.empty()){
-            forgotten.push_back(randomNumber);
-            system("clear");
-            new_forgotten = true;
-            return false;
-
-        } else if (str == "q"){
-            system("clear");
-            go_to_forgotten = true;
-            return false;
-        }
-
+        num = 1;
+        num_of_forgotten = forgotten.size();
+        forgotten.clear();
+        print(forgotten); 
+    } else {
+        cout << "You did everything, congratulations:D" << "\n";
     } 
 
-    return false;
+    return;
 }
 
 int main(){
-    random_device rd;
-    mt19937 gen(rd());
-    uniform_int_distribution<> distr(0, Overall_size - 1);
-
-    bool go_to_forgotten = false, new_forgotten = false;
-    int randomNumber, num = 1;
-
+    system("clear");
     vector<int> forgotten;
-    vector<int> next_round;
 
-    while(num <= Overall_size){
-        randomNumber = distr(gen);
+    print(forgotten);
 
-        if(kanji[randomNumber].was_shown != true){
-            kanji[randomNumber].was_shown = true;
-
-            if(flash_cards(randomNumber, forgotten, num, go_to_forgotten, new_forgotten)){
-                return 0;
-            } 
-            if(go_to_forgotten && forgotten.size() != 0){
-                break;
-            }
-            num++;
-            
-        }
-
-    }
-    
-    while(true){
-        if(forgotten.size() == 0 && next_round.size() == 0){
-            cout << "You did everything, congratulations:D" << "\n";
-            while(getline(cin, str)){
-                if(str.empty()){
-                    system("clear");
-                    return 0;
-                }
-            } 
-        } else {
-            cout << "Wait... you forgot some? Lets try again then";
-            int y = forgotten.size();
-            
-            for(int i = 0; i < y; i++){
-                go_to_forgotten = false;
-                randomNumber = forgotten.back();
-
-                if(flash_cards(randomNumber, forgotten, i + 1, go_to_forgotten, new_forgotten)){
-                    return 0;
-                } 
-                if(new_forgotten){
-                    next_round.push_back(forgotten.back());
-                    forgotten.pop_back();
-                }
-                new_forgotten = false;
-                forgotten.pop_back();
-                
-                
-            }
-            while(next_round.size() != 0){
-                forgotten.push_back(next_round.back());
-                next_round.pop_back();
-            }
-        }
-    }
-      
     return 0;
 }

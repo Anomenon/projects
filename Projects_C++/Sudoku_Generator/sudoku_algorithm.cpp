@@ -8,6 +8,7 @@ bool no_zeros = true;
 struct Sudoku_Tile{
     int num = 0;
     bool is_used = false;
+    int square_num = 0;
     int Values[10] = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
 };
 
@@ -56,124 +57,17 @@ void Generator(vector<vector<Sudoku_Tile> >& Sudoku_Grid, int& y, int& x, int& n
     Sudoku_Grid[y][x].is_used = true;
     no_zeros = true;
 
-    if(y < 3){
-        for(int i = 0; i < 3; i++){
-            if(x < 3){
-                for(int j = 0; j < 3; j++){
-                    if(i == y && j == x){
-                        for(int k = 1; k < 10; k++){
-                            if(k != n){
-                                Sudoku_Grid[i][j].Values[k] = 0;
-                            }
+    for(int i = 0; i < Sudoku_Grid.size(); i++){
+        for(int j = 0; j < Sudoku_Grid[i].size(); j++){
+            if(Sudoku_Grid[i][j].square_num == Sudoku_Grid[y][x].square_num){
+                if(i == y && j == x){
+                    for(int k = 1; k < 10; k++){
+                        if(k != n){
+                            Sudoku_Grid[i][j].Values[k] = 0;
                         }
-                    } else {
-                        Sudoku_Grid[i][j].Values[n] = 0;
                     }
-                }
-            } 
-            else if(x > 2 && x < 6){
-                for(int j = 3; j < 6; j++){
-                    if(i == y && j == x){
-                        for(int k = 1; k < 10; k++){
-                            if(k != n){
-                                Sudoku_Grid[i][j].Values[k] = 0;
-                            }
-                        }
-                    } else {
-                        Sudoku_Grid[i][j].Values[n] = 0;
-                    }
-                }
-            } else{
-                for(int j = 6; j < 9; j++){
-                    if(i == y && j == x){
-                        for(int k = 1; k < 10; k++){
-                            if(k != n){
-                                Sudoku_Grid[i][j].Values[k] = 0;
-                            }
-                        }
-                    } else {
-                        Sudoku_Grid[i][j].Values[n] = 0;
-                    }
-                }
-            }
-        }
-    } else if(2 < y && y < 6){
-        for(int i = 3; i < 6; i++){
-            if(x < 3){
-                for(int j = 0; j < 3; j++){
-                    if(i == y && j == x){
-                        for(int k = 1; k < 10; k++){
-                            if(k != n){
-                                Sudoku_Grid[i][j].Values[k] = 0;
-                            }
-                        }
-                    } else {
-                        Sudoku_Grid[i][j].Values[n] = 0;
-                    }
-                }
-            } else if(x > 2 && x < 6){
-                for(int j = 3; j < 6; j++){
-                    if(i == y && j == x){
-                        for(int k = 1; k < 10; k++){
-                            if(k != n){
-                                Sudoku_Grid[i][j].Values[k] = 0;
-                            }
-                        }
-                    } else {
-                        Sudoku_Grid[i][j].Values[n] = 0;
-                    }
-                }
-            } else{
-                for(int j = 6; j < 9; j++){
-                    if(i == y && j == x){
-                        for(int k = 1; k < 10; k++){
-                            if(k != n){
-                                Sudoku_Grid[i][j].Values[k] = 0;
-                            }
-                        }
-                    } else {
-                        Sudoku_Grid[i][j].Values[n] = 0;
-                    }
-                }
-            }
-        }
-    } else {
-        for(int i = 6; i < 9; i++){
-            if(x < 3){
-                for(int j = 0; j < 3; j++){
-                    if(i == y && j == x){
-                        for(int k = 1; k < 10; k++){
-                            if(k != n){
-                                Sudoku_Grid[i][j].Values[k] = 0;
-                            }
-                        }
-                    } else {
-                        Sudoku_Grid[i][j].Values[n] = 0;
-                    }
-                }
-            } else if(x > 2 && x < 6){
-                for(int j = 3; j < 6; j++){
-                    if(i == y && j == x){
-                        for(int k = 1; k < 10; k++){
-                            if(k != n){
-                                Sudoku_Grid[i][j].Values[k] = 0;
-                            }
-                        }
-                    } else {
-                        Sudoku_Grid[i][j].Values[n] = 0;
-                    }
-                }
-            } else{
-                for(int j = 6; j < 9; j++){
-                    if(i == y && j == x){
-                        for(int k = 1; k < 10; k++){
-                            if(k != n){
-                                Sudoku_Grid[i][j].Values[k] = 0;
-                            }
-                        }
-                    } else {
-                        Sudoku_Grid[i][j].Values[n] = 0;
-                    }
+                } else {
+                    Sudoku_Grid[i][j].Values[n] = 0;
                 }
             }
         }
@@ -259,11 +153,41 @@ int main(){
         cin >> difficulty;
         cout << '\n';
         if(difficulty == 0){
+            system("clear");
             break;
         }
 
         while(true){
             vector<vector<Sudoku_Tile> >Sudoku_Grid(9, vector<Sudoku_Tile>(9));
+            for(int i = 0; i < Sudoku_Grid.size(); i++){
+                for(int j = 0; j < Sudoku_Grid[j].size(); j++){
+                    if(i < 3){
+                        if(j < 3){
+                        Sudoku_Grid[i][j].square_num = 1;
+                        } else if(j > 2 && j < 6){
+                            Sudoku_Grid[i][j].square_num = 2;
+                        } else {
+                            Sudoku_Grid[i][j].square_num = 3;
+                        }
+                    } else if(i > 2 && i < 6){
+                        if(j < 3){
+                        Sudoku_Grid[i][j].square_num = 4;
+                        } else if(j > 2 && j < 6){
+                            Sudoku_Grid[i][j].square_num = 5;
+                        } else {
+                            Sudoku_Grid[i][j].square_num = 6;
+                        }
+                    } else {
+                        if(j < 3){
+                        Sudoku_Grid[i][j].square_num = 7;
+                        } else if(j > 2 && j < 6){
+                            Sudoku_Grid[i][j].square_num = 8;
+                        } else {
+                            Sudoku_Grid[i][j].square_num = 9;
+                        }
+                    }
+                }
+            }
             y = rand() % 9;
             x = rand() % 9;
             n = rand() % 9 + 1;
@@ -285,7 +209,5 @@ int main(){
 
         }
     }
-    
-    
     return 0;
 }

@@ -36,7 +36,7 @@ void print(vector<int>& forgotten){
 
     getline(cin, str); 
     if(!str.empty()){
-        forgotten.push_back(num - 1);
+        forgotten.push_back(random_kanji);
     }
 
     system("clear");
@@ -53,7 +53,7 @@ void print(vector<int>& forgotten){
         forgotten.clear();
         print(forgotten); 
     } else {
-        cout << "You did everything, congratulations:D" << "\n";
+        cout << "You did everything, congratulations:D" << "\n\n";
     } 
 
     return;

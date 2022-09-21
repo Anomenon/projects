@@ -142,6 +142,17 @@ void Grid_Hide(vector<vector<Sudoku_Tile> >&Sudoku_Grid, int& difficulty){
     print(Hidden_Grid);
 }
 
+void Num_Of_Square(vector<vector<Sudoku_Tile> >& Sudoku_Grid, int& i, int& j, int num){
+    if(j < 3){
+        Sudoku_Grid[i][j].square_num = num;
+    } else if(j > 2 && j < 6){
+        Sudoku_Grid[i][j].square_num = num + 1;
+    } else {
+        Sudoku_Grid[i][j].square_num = num + 2;
+    }
+
+}
+
 int main(){
     int x, y, n, difficulty;
     string str;
@@ -162,29 +173,11 @@ int main(){
             for(int i = 0; i < Sudoku_Grid.size(); i++){
                 for(int j = 0; j < Sudoku_Grid[j].size(); j++){
                     if(i < 3){
-                        if(j < 3){
-                        Sudoku_Grid[i][j].square_num = 1;
-                        } else if(j > 2 && j < 6){
-                            Sudoku_Grid[i][j].square_num = 2;
-                        } else {
-                            Sudoku_Grid[i][j].square_num = 3;
-                        }
+                        Num_Of_Square(Sudoku_Grid, i, j, 1);
                     } else if(i > 2 && i < 6){
-                        if(j < 3){
-                        Sudoku_Grid[i][j].square_num = 4;
-                        } else if(j > 2 && j < 6){
-                            Sudoku_Grid[i][j].square_num = 5;
-                        } else {
-                            Sudoku_Grid[i][j].square_num = 6;
-                        }
+                        Num_Of_Square(Sudoku_Grid, i, j, 4);
                     } else {
-                        if(j < 3){
-                        Sudoku_Grid[i][j].square_num = 7;
-                        } else if(j > 2 && j < 6){
-                            Sudoku_Grid[i][j].square_num = 8;
-                        } else {
-                            Sudoku_Grid[i][j].square_num = 9;
-                        }
+                        Num_Of_Square(Sudoku_Grid, i, j, 7);
                     }
                 }
             }

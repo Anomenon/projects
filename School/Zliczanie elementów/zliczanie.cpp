@@ -1,37 +1,46 @@
 #include <iostream>
 #include <fstream>
 #include <string>
+#include <sstream>
 using namespace std;
 
 int main(){
     ifstream File;
     File.open("slowa.txt");
-    string str = "";
-    int count_1 = 0, count_2 = 0, count_3 = 0;
+    string str;
+    string word, word_snd;
+    int count_1 = 0, count_2 = 0, count_3 = 0, wrd_count = 0;
     
-    while (getline(File, str)){
-        // for(int i = 0; i < str.length(); i++){
-        //     if((str[i + 1] == ' ' || i + 1 == str.length() - 1) && str[i] == 'A'){
-        //         count_1 ++;
-        //     }
-        // }
-        
+    while (File >> word >> word_snd){
 
-        string word = "", word_snd = "";
-        for(int i = 0; i < str.length(); i++){
-            if(str[i] == ' '){
-                for(int j = i + 1; j < str.length(); j++){
-                    word_snd += str[j];
-                }
-                break;
-            } else {
-                word += str[i];
-            }
+        if(word[word.length() - 1] == 'A'){
+            count_1++;
+        }
+        if(word_snd[word_snd.length() - 1] == 'A'){
+            count_1++;
         }
 
-        cout << word_snd << "\n";
-        cout <<  word << '\n';
-    
+        if (word_snd.find(word) != string::npos) {
+            count_2++;
+        } 
+
+        if(word.length() == word_snd.length()){
+            bool is_anagram = true;
+            sort(word.begin(), word.end());
+            sort(word_snd.begin(), word_snd.end());
+            
+            for(int i = 0; i < word.length(); i++){
+                if(word[i] != word_snd[i]){
+                    is_anagram = false;
+                    break;
+                }
+            }
+
+            if(is_anagram){
+                count_3++;
+            }
+        }
+        
     }
     cout << count_1 << '\n' << count_2 << '\n' << count_3 << '\n';
     return 0;

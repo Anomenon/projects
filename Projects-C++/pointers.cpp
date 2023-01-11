@@ -1,17 +1,13 @@
 #include <iostream>
 #include <vector>
-using namespace std;
-//Dfs
-//Bfs
-//Dijkstra
-//Ford argorithm
 
 int main(){
-	int x = 5;
-	int* z = &x;
-	int& y = x;
-	//y = 6;
-	cout << z << '\n' << *z << " "<< y <<'\n';
+	int input;
+	std::vector<int *> v;
+	while(std::cin >> input){
+		int * pt = &input;
+		std::cout << pt << '\n';
+	}
 	
 	return 0;
 }

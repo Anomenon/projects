@@ -10,6 +10,7 @@ struct Kanji
     bool was_shown;
 
 };
+
 int const SIZE = 534;
 int num = 1;
 int num_of_forgotten = 0;

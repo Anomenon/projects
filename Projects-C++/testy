@@ -1,0 +1,56 @@
+Node.java 
+public class Node {
+
+    //Pole (fields)
+    public String dane;
+    public Node next;
+
+    //Metody (methods, behaviours)
+    public Node(String d){
+        dane=d;
+    }
+}
+
+LinkedList.java 
+public class LinkedList {
+
+    private Node head;
+
+    public LinkedList(String d){
+        head = new Node(d);
+    }
+
+    // add - O(1)    d[3]=20;
+    // add - O(n)
+    public void add(String d){
+        //1. Dodanie nowego elementu
+        Node newNode = new Node(d);
+        //2. Szukamy ostatniego elementy na liście
+        Node tmp = head;
+        while(tmp.next != null) {
+            tmp = tmp.next;
+        }
+        //3. Podłączamy pod ostatni element - nowy element
+        tmp.next = newNode;
+    }
+
+    //Dodanie elementu na początku listy
+    public void addHead(String d){
+        Node tmp = head;
+        Node new_head = new Node(d);
+        new_head.next = tmp;
+        head = new_head;
+    }
+
+    //Zwrócenie liczby elementów na liście
+    public int count(){
+        int counter = 0;
+        Node tmp = head;
+        while(tmp.next != null) {
+            tmp = tmp.next;
+            counter += 1;
+        }
+        return counter;
+    }
+
+}

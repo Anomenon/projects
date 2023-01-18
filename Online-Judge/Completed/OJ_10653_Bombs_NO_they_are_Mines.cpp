@@ -54,7 +54,7 @@ int main(){
 	        }
 	    }
 
-		std::cin >> root_x >> root_y;
+		std::cin >> root_y >> root_x;
 		BFS(Plane, Bombs, root_x, root_y);
 
 		std::cin >> R >> C;

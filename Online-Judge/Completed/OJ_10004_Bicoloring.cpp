@@ -1,16 +1,13 @@
 #include <iostream>
 #include <vector>
-#include <fstream>
 using namespace std;
 
 void DFS(int v, int prev, vector<vector<int> >& g, vector<char>& colors){
-    
     for (int i = 0; i < g[v].size(); i++){
         if(v == 0){
 
             colors[v] = 'r';
         } else {
-
             if(colors[prev] == 'r'){
                 colors[v]= 'g';
             } else {
@@ -31,10 +28,12 @@ void addEdge(int node_a, int node_b, vector<vector<int> >& graph){
 }
 
 int main(){
-    ofstream File("IN_OUT/output.txt");
-    int nodes, edges, node_a, node_b;    
-
-    while(cin >> nodes, nodes != 0){
+    while(true){
+        int nodes, node_a, node_b, edges;
+        cin >> nodes;
+        if(nodes == 0){
+            break;
+        }
 
         cin >> edges;
         vector<vector<int> > graph(nodes);
@@ -44,12 +43,12 @@ int main(){
             cin >> node_a >> node_b;
             addEdge(node_a, node_b, graph);
         }
-        
+
         DFS(0, 0, graph, colors);
 
         string is_bicolorable = " ";
-        bool bnot = false;
 
+        bool bnot = false;
         for (int i = 0; i < graph.size(); i++) {
             for (int j = 0; j < graph[i].size(); j++){
 
@@ -68,7 +67,7 @@ int main(){
             }        
         }
 
-        File << is_bicolorable << '\n';       
+        cout << is_bicolorable << "\n";       
     }
     return 0;
 }
